@@ -4,7 +4,6 @@ import { ArrowUpRight, DownloadSimple } from "@phosphor-icons/react/dist/ssr";
 import { Container } from "@/components/ui/Container";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { Button } from "@/components/ui/Button";
-import { PrintButton } from "@/components/resume/PrintButton";
 import { getResume, getSite } from "@/lib/content";
 import { formatYearMonth } from "@/lib/format";
 
@@ -66,7 +65,6 @@ export default function ResumePage() {
               Download PDF
             </Button>
           ) : null}
-          <PrintButton />
           <Button
             href={`mailto:${basics.email}`}
             variant="ghost"
