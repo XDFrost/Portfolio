@@ -70,7 +70,7 @@ export const siteSchema = z.object({
     experience: z.string().default("Experience"),
     interests: z.string().default("Interests"),
     education: z.string().default("Education"),
-    certifications: z.string().default("Certifications"),
+    "certifications and honors": z.string().default("Certifications and Honors"),
   }),
 });
 
@@ -176,7 +176,7 @@ export const resumeSchema = z.object({
     )
     .default([]),
   skills: z.array(skillGroupSchema).default([]),
-  certifications: z
+  "certifications and honors": z
     .array(
       z.object({
         name: z.string().min(1),

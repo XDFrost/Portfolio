@@ -1,9 +1,9 @@
 {
-  "name": "Rohan Mehrotra",
-  "role": "Full-stack engineer",
-  "tagline": "I build data-heavy web products that stay fast as they grow.",
-  "email": "hello@rohanmehrotra.example",
-  "url": "https://rohanmehrotra.example",
+  "name": "Pratham Gupta",
+  "role": "Associate SDET & AI Engineer",
+  "tagline": "I build AI-powered systems and automation that make software engineering faster and more reliable.",
+  "email": "pratham0gupta@gmail.com",
+  "url": "https://github.com/XDFrost",
   "nav": [
     { "label": "Home", "href": "/" },
     { "label": "About", "href": "/about" },
@@ -12,22 +12,38 @@
     { "label": "Resume", "href": "/resume" }
   ],
   "socials": [
-    { "label": "GitHub", "href": "https://github.com/your-handle", "icon": "github" },
-    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/your-handle", "icon": "linkedin" },
-    { "label": "Email", "href": "mailto:hello@rohanmehrotra.example", "icon": "email" }
+    {
+      "label": "GitHub",
+      "href": "https://github.com/XDFrost",
+      "icon": "github"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/pratham-gupta-590445255/",
+      "icon": "linkedin"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:pratham0gupta@gmail.com",
+      "icon": "email"
+    }
   ],
-  "footerNote": "Built with Next.js. Every word on this site lives in a JSON file.",
+  "footerNote": "Built with modern web technologies. Every word on this site lives in a JSON file.",
   "pages": {
-    "about": { "title": "About" },
+    "about": {
+      "title": "About"
+    },
     "projects": {
       "title": "Projects",
-      "intro": "Things I have built and kept running. Filter by what they are made of."
+      "intro": "AI systems, developer tools, and applications I have built across automation, machine learning, and full-stack development."
     },
     "blog": {
       "title": "Blog",
-      "intro": "Notes on what broke in production and what we did about it."
+      "intro": "Notes on AI engineering, automation, software testing, and things I build."
     },
-    "resume": { "title": "Resume" }
+    "resume": {
+      "title": "Resume"
+    }
   },
   "labels": {
     "featured": "Selected work",
@@ -36,6 +52,6 @@
     "experience": "Experience",
     "interests": "Interests",
     "education": "Education",
-    "certifications": "Certifications"
+    "certifications and honors": "Certifications and Honors"
   }
 }

@@ -1,72 +1,142 @@
 {
   "basics": {
-    "name": "Rohan Mehrotra",
-    "title": "Senior Full-stack Engineer",
+    "name": "Pratham Gupta",
+    "title": "Associate SDET",
     "location": "Bengaluru, India",
-    "email": "hello@rohanmehrotra.example",
-    "summary": "Eight years building data-heavy web products for logistics and fintech teams. I lead small teams, own systems end to end, and prefer fewer moving parts.",
+    "email": "pratham0gupta@gmail.com",
+    "summary": "Associate SDET and AI Engineer building AI-powered testing systems, autonomous agents, automation frameworks, and full-stack applications. I work across AI agents, RAG, computer vision, test automation, and modern web technologies.",
     "links": [
-      { "label": "GitHub", "href": "https://github.com/your-handle" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/your-handle" }
+      { "label": "GitHub", "href": "https://github.com/XDFrost" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/pratham-gupta-590445255/" }
     ]
   },
   "experience": [
     {
-      "company": "Kestrel Freight",
-      "title": "Lead Engineer",
-      "location": "Bengaluru",
-      "start": "2024-03",
-      "end": "Present",
-      "summary": "Lead a team of four building Dispatch, the carrier's route planning and driver app.",
+      "company": "EightfoldAI",
+      "title": "Associate SDET",
+      "location": "Bengaluru, India",
+      "start": "2026-02",
+      "end": "2026-08",
+      "summary": "Built autonomous AI testing systems and internal automation tools while contributing to and hardening the existing QA automation framework.",
       "bullets": [
-        "Designed the PostGIS routing pipeline; planning time per route fell from 40 minutes to under 5",
-        "Replaced a Kubernetes deployment with two instances and a single CI job, cutting infrastructure cost by roughly half",
-        "Set up on-call rotation and runbooks; no unplanned downtime in the last twelve months"
+        "Built Proctor, an autonomous AI candidate-bot that joins live interviews over LiveKit voice, completes interviews end-to-end, and evaluates them using a 13-judge framework",
+        "Implemented an end-to-end RTM configuration generator, reducing manual workload by 50% and improving accuracy by 15%",
+        "Contributed to the Qatch QA Automation Framework covering 90+ modules, 500+ test cases, and 7,500 parametrized runs across TA and TM",
+        "Created Playwright UI-test and Airflow DAG generators with locator auto-discovery, database validation, and a 14-point pre-ship check"
       ]
     },
     {
-      "company": "Parvati Pay",
-      "title": "Backend Engineer",
+      "company": "Ikarus 3D",
+      "title": "Software Developer Associate",
+      "location": "Chandigarh, India",
+      "start": "2025-04",
+      "end": "2026-01",
+      "summary": "Worked on AI-powered products, full-stack applications, and internal automation tools.",
+      "bullets": [
+        "Created an intent-based custom AI chatbot designed to upsell products to users",
+        "Built SwatchAI, a full-stack AI tool for realistic furniture replacement using YOLOv8, Stable Diffusion, and ComfyUI",
+        "Created a custom lossless image compression format, txcmp, achieving compression levels of up to 98% and reducing image load time from around 1800 ms to 100–300 ms"
+      ]
+    },
+    {
+      "company": "Social Winter of Code",
+      "title": "Mentor",
       "location": "Remote",
-      "start": "2021-06",
-      "end": "2024-02",
-      "summary": "Owned the ledger and reconciliation services for a payments platform processing a few hundred thousand transactions a day.",
+      "start": "2025-01",
+      "end": "2025-03",
+      "summary": "Mentored open-source projects across different technology stacks.",
       "bullets": [
-        "Rebuilt nightly reconciliation as a staged SQL pipeline; runtime dropped from 6 hours to 35 minutes",
-        "Introduced an audit table that made every unmatched transaction explainable to finance without engineering help",
-        "Led two Postgres major-version upgrades with zero data loss"
-      ]
-    },
-    {
-      "company": "Oakmoss Consulting",
-      "title": "Software Engineer",
-      "location": "Pune",
-      "start": "2018-07",
-      "end": "2021-05",
-      "summary": "Built internal tools for a geological survey firm, including the first version of Fieldnotes.",
-      "bullets": [
-        "Shipped an offline-first React Native app used daily by a team of twelve surveyors",
-        "Wrote the data import pipeline that replaced manual transcription of field notes",
-        "Mentored two interns who both joined full time"
+        "Mentored four projects spanning different technology stacks, including deep learning, MERN, data management, and pedestrian safety applications"
       ]
     }
   ],
   "education": [
     {
-      "school": "College of Engineering, Pune",
-      "degree": "B.E. Computer Engineering",
-      "start": "2014",
-      "end": "2018",
-      "note": "Final-year project on spatial indexing for mobile databases"
+      "school": "Chitkara University",
+      "degree": "Bachelor of Engineering, Specialization in AI",
+      "start": "2022-07",
+      "end": "2026-06",
+      "note": "CGPA: 9.15"
     }
   ],
   "skills": [
-    { "group": "Languages", "items": ["TypeScript", "Go", "Python", "SQL"] },
-    { "group": "Frameworks", "items": ["React", "Next.js", "React Native", "Node.js"] },
-    { "group": "Data", "items": ["PostgreSQL", "PostGIS", "Redis", "Kafka", "SQLite"] },
-    { "group": "Infrastructure", "items": ["AWS", "Terraform", "Docker", "GitHub Actions", "Grafana"] }
+    {
+      "group": "Languages",
+      "items": ["Python", "JavaScript", "TypeScript", "Java"]
+    },
+    {
+      "group": "Frontend",
+      "items": ["React.js", "Tailwind CSS", "Zustand"]
+    },
+    {
+      "group": "Backend",
+      "items": ["Node.js", "Express.js", "Flask", "FastAPI"]
+    },
+    {
+      "group": "AI / Machine Learning",
+      "items": [
+        "Machine Learning",
+        "Deep Learning",
+        "Generative AI",
+        "RAG",
+        "AI Agents",
+        "Agentic Workflows",
+        "NLP",
+        "PyTorch",
+        "Scikit-learn",
+        "OpenCV"
+      ]
+    },
+    {
+      "group": "AI Frameworks",
+      "items": ["LangChain", "LangGraph", "MCP", "ComfyUI"]
+    },
+    {
+      "group": "Testing & Automation",
+      "items": ["Playwright", "Pytest", "Airflow"]
+    },
+    {
+      "group": "Databases",
+      "items": ["MySQL", "SQLite", "MongoDB", "Vector Databases", "Knowledge Graphs"]
+    },
+    {
+      "group": "Cloud & Tools",
+      "items": ["AWS", "Git", "Docker"]
+    }
   ],
-  "certifications": [
-    { "name": "AWS Certified Solutions Architect, Associate", "issuer": "Amazon Web Services", "year": 2023 }
+  "certifications and honors": [
+    {
+      "name": "Deep Learning Specialization",
+      "issuer": "DeepLearning.AI (Coursera)",
+      "year": 2024
+    },
+    {
+      "name": "Introduction to Data Analytics",
+      "issuer": "IBM (Coursera)",
+      "year": 2024
+    },
+    {
+      "name": "Joget Hackathon",
+      "issuer": "Joget",
+      "year": 2024,
+      "note": "Top 5 team"
+    },
+    {
+      "name": "Sign Language Assisting Gloves Patent",
+      "issuer": "Chitkara University",
+      "year": 2025
+    },
+    {
+      "name": "Bajaj Finance Hackathon 2024",
+      "issuer": "Bajaj Finance",
+      "year": 2025,
+      "note": "Top 50 finalist team"
+    },
+    {
+      "name": "AICreate Competition",
+      "issuer": "AICreate",
+      "year": 2025,
+      "note": "Finalist"
+    }
   ]
 }

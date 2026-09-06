@@ -139,10 +139,10 @@ export default function ResumePage() {
         </Section>
       ) : null}
 
-      {resume.certifications.length ? (
-        <Section title={site.labels.certifications}>
+      {resume["certifications and honors"].length ? (
+        <Section title={site.labels["certifications and honors"]}>
           <ul className="flex flex-col gap-4">
-            {resume.certifications.map((c) => (
+            {resume["certifications and honors"].map((c) => (
               <li
                 key={`${c.name}-${c.year}`}
                 className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1"

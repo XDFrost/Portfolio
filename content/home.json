@@ -1,23 +1,30 @@
 {
   "hero": {
-    "headline": "Software that holds up under real traffic.",
-    "subtext": "Full-stack engineer with eight years shipping logistics, fintech and developer tools. Currently open to senior roles.",
+    "headline": "I build AI systems that automate real engineering work.",
+    "subtext": "Associate SDET and AI Engineer working across autonomous agents, test automation, RAG, computer vision, and full-stack development.",
     "primaryCta": { "label": "View projects", "href": "/projects" },
     "secondaryCta": { "label": "Read the blog", "href": "/blog" },
     "image": {
-      "src": "https://picsum.photos/seed/rohan-studio-desk/900/1100",
-      "alt": "Rohan at a desk with two monitors and an open notebook"
+      "src": "/about-main.png",
+      "alt": "Pratham working at a desk"
     }
   },
-  "featuredProjectSlugs": ["dispatch", "ledger-sync", "fieldnotes"],
+  "featuredProjectSlugs": [
+    "intellirag",
+    "devconnect",
+    "logiclink"
+  ],
   "latestPostCount": 3,
   "now": {
     "heading": "Now",
-    "body": "Rebuilding the sync engine in Fieldnotes around CRDTs, reading everything I can find about query planners, and mentoring two junior engineers through their first production incidents."
+    "body": "Building AI-powered testing systems and automation workflows, exploring agentic AI and RAG, and turning repetitive engineering tasks into reliable automated workflows."
   },
   "contact": {
-    "heading": "Working on something similar?",
-    "body": "I reply to every message within two working days.",
-    "cta": { "label": "Email me", "href": "mailto:hello@rohanmehrotra.example" }
+    "heading": "Have something interesting to build?",
+    "body": "I'm always interested in working on challenging problems involving AI, automation, and software engineering.",
+    "cta": {
+      "label": "Email me",
+      "href": "mailto:pratham0gupta@gmail.com"
+    }
   }
 }

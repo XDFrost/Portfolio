@@ -1,90 +1,83 @@
 [
   {
-    "slug": "dispatch",
-    "title": "Dispatch",
-    "summary": "Live route planning for a regional freight carrier. Replaced a spreadsheet and a phone tree.",
+    "slug": "intellirag",
+    "title": "IntelliRAG",
+    "summary": "AI-powered research assistant for document Q&A and web-based knowledge retrieval, with local RAG and multi-model support.",
     "year": 2025,
-    "role": "Lead engineer",
-    "stack": ["TypeScript", "Next.js", "PostgreSQL", "PostGIS", "Redis"],
+    "role": "Creator",
+    "stack": [
+      "Python",
+      "Streamlit",
+      "LangChain",
+      "Llama 3.2",
+      "Gemma 3",
+      "Tavily API"
+    ],
     "cover": {
-      "src": "https://picsum.photos/seed/dispatch-freight-map/1600/1000",
-      "alt": "Trucks lined up at a loading dock at dusk"
+      "src": "/intellirag.png",
+      "alt": "AI research assistant interface"
     },
     "featured": true,
-    "links": {
-      "live": "https://example.com/dispatch",
-      "repo": "https://github.com/your-handle/dispatch"
-    },
+    "links": {},
     "highlights": [
-      "Cut average planning time per route from 40 minutes to under 5",
-      "PostGIS routing with cached isochrones, p95 under 300 ms",
-      "Runs on two small instances; no Kubernetes"
+      "Built a local RAG system for document question answering",
+      "Integrated Gemma 3 for conversational AI and Llama 3.2 for document analysis",
+      "Added real-time web access through the Tavily API to augment answers with current information"
     ],
-    "body": "## The problem\n\nKestrel Freight planned around 180 deliveries a day using a shared spreadsheet and a dispatcher who knew every driver's phone number by heart. When she went on leave, planning stopped.\n\n## What we built\n\nDispatch is a web app that ingests the day's orders, groups them into routes using PostGIS, and lets a dispatcher drag stops between drivers when reality disagrees with the plan. Drivers get a mobile view with turn-by-turn links and one-tap status updates.\n\n### Routing\n\nThe first version called a third-party routing API for every pair of stops. It was accurate and far too slow. We moved to precomputed isochrones stored in PostGIS and only call the external API for the final ordering inside each cluster.\n\n```sql\nSELECT stop_id\nFROM stops\nWHERE ST_Within(location, :isochrone_15_min)\nORDER BY ST_Distance(location, :depot);\n```\n\n### Keeping it boring\n\nThe whole system is one Next.js app, one Postgres database and one Redis instance for the live driver positions. Deploys are a single GitHub Actions job. The dispatcher has not needed to call me since launch, which is the metric I care about most.\n\n## Outcome\n\nPlanning a full day now takes the dispatcher a coffee break instead of a morning, and the carrier added a third depot without adding a second dispatcher."
+    "body": "## Overview\n\nIntelliRAG is a local AI-powered research assistant designed for document question answering and web-based knowledge retrieval.\n\n## Architecture\n\nThe system combines local retrieval with multiple language models. Documents can be analyzed using Llama 3.2, while Gemma 3 handles conversational interactions. Tavily provides web access when information beyond the local document collection is required.\n\n## What I built\n\nThe project brings together document retrieval, conversational AI, and real-time web knowledge into a single research workflow, with the goal of making information retrieval more useful without relying entirely on cloud-hosted models."
   },
   {
-    "slug": "ledger-sync",
-    "title": "Ledger Sync",
-    "summary": "Reconciliation engine that matches bank statements against an internal ledger at forty million rows.",
+    "slug": "devconnect",
+    "title": "DevConnect",
+    "summary": "Community-driven developer collaboration platform built around real-time interaction and technology-based discovery.",
     "year": 2024,
-    "role": "Backend engineer",
-    "stack": ["Go", "PostgreSQL", "Kafka", "Grafana"],
+    "role": "Creator",
+    "stack": [
+      "React.js",
+      "Express.js",
+      "MongoDB",
+      "Hugging Face",
+      "Socket.IO"
+    ],
     "cover": {
-      "src": "https://picsum.photos/seed/ledger-sync-ink-paper/1600/1000",
-      "alt": "Stacks of printed ledgers on a wooden table"
+      "src": "/devconnect.png",
+      "alt": "Developers collaborating on a software project"
     },
     "featured": true,
-    "links": {
-      "repo": "https://github.com/your-handle/ledger-sync"
-    },
+    "links": {},
     "highlights": [
-      "Nightly reconciliation dropped from 6 hours to 35 minutes",
-      "Every unmatched row is explainable from a single audit table",
-      "Zero data loss through two Postgres major-version upgrades"
+      "Built a MERN-based platform for developer collaboration",
+      "Implemented real-time communication using Socket.IO",
+      "Integrated a Hugging Face NSFW detection model for platform safety",
+      "Designed developer discovery around technology stack preferences"
     ],
-    "body": "## Context\n\nParvati Pay settles a few hundred thousand transactions a day. Every night a job compares the bank's statement with the internal ledger and flags anything that does not line up. When the job started taking longer than the night, finance noticed before engineering did.\n\n## Approach\n\nThe old job loaded both sides into memory and compared them in application code. Ledger Sync pushes the matching into Postgres with a staged pipeline:\n\n1. Load the bank file into an unlogged staging table.\n2. Match exact pairs with a single hash join.\n3. Match near pairs (amount equal, date within two days) with a range join on a partial index.\n4. Write everything that remains, with the reason it failed each stage, to an audit table.\n\nKafka carries the per-transaction results downstream so the support tool can show a customer why a payment is still pending.\n\n## What I would do differently\n\nWe kept the fuzzy-matching rules in Go for too long. Moving them into SQL made them faster and, more importantly, made them readable to the finance team who owned the rules in the first place."
+    "body": "## Overview\n\nDevConnect is a community-driven developer collaboration platform designed to help developers connect and collaborate based on their technology interests.\n\n## Features\n\nThe platform uses React.js on the frontend with an Express.js backend and MongoDB for persistent data. Socket.IO provides real-time functionality, while a Hugging Face NSFW detection model adds an automated safety layer.\n\n## Focus\n\nThe project combines full-stack development, real-time communication, machine learning integration, and community-focused product design."
   },
   {
-    "slug": "fieldnotes",
-    "title": "Fieldnotes",
-    "summary": "Offline-first notes app for surveyors who spend days without signal. Sync that never asks the user to pick a version.",
-    "year": 2026,
-    "role": "Solo developer",
-    "stack": ["React Native", "TypeScript", "SQLite", "CRDTs"],
-    "cover": {
-      "src": "https://picsum.photos/seed/fieldnotes-hillside-survey/1600/1000",
-      "alt": "A surveyor on a hillside holding a tablet"
-    },
-    "featured": true,
-    "links": {
-      "live": "https://example.com/fieldnotes"
-    },
-    "highlights": [
-      "Works for a full week offline, syncs in seconds when back online",
-      "Conflict-free merges using per-field last-writer-wins registers",
-      "Under 9 MB installed"
-    ],
-    "body": "## Why another notes app\n\nGeological surveyors at Oakmoss Consulting spend days in places with no signal, then come back to a hotel and try to merge three people's notes about the same site. Every generic notes app either lost edits or made them choose between versions they did not remember writing.\n\n## Design\n\nEach note is a document of independent fields. Every field is a CRDT register tagged with a hybrid logical clock, so two people editing different fields of the same note never conflict, and two people editing the same field converge deterministically without a dialog.\n\nStorage is SQLite on device. Sync is a plain HTTPS endpoint that accepts a batch of operations and returns everything the client has not seen. There is no realtime layer because surveyors do not need one.\n\n## Current work\n\nI am replacing the per-field registers with a small sequence CRDT for the long-form description field, so that two people extending the same paragraph both keep their text."
-  },
-  {
-    "slug": "palette",
-    "title": "Palette",
-    "summary": "Command-line tool that pulls design tokens from a Figma file and writes them as CSS variables and TypeScript types.",
+    "slug": "logiclink",
+    "title": "LogicLink",
+    "summary": "Multipurpose Discord bot combining moderation, music playback, and community utilities into a single platform.",
     "year": 2023,
-    "role": "Creator and maintainer",
-    "stack": ["Node.js", "TypeScript", "Figma API"],
-    "cover": {
-      "src": "https://picsum.photos/seed/palette-color-swatches/1600/1000",
-      "alt": "Paint swatches fanned out on a grey surface"
-    },
-    "featured": false,
-    "links": {
-      "repo": "https://github.com/your-handle/palette"
-    },
-    "highlights": [
-      "One command replaces a weekly copy-paste ritual",
-      "Diffs token changes in pull requests so reviewers see what moved"
+    "role": "Creator",
+    "stack": [
+      "Python",
+      "SQLite",
+      "Docker",
+      "Discord.py",
+      "Wavelink"
     ],
-    "body": "## Origin\n\nOur design team changed a grey. Three weeks later two products were still using the old one. Palette started as a script to end that conversation.\n\n## How it works\n\nPalette reads the variables collection from a Figma file, normalises colour, spacing and type tokens into a single JSON tree, and emits CSS custom properties plus a TypeScript module with literal types. Run it in CI and the pull request shows exactly which tokens changed.\n\n```bash\nnpx palette pull --file FIGMA_FILE_ID --out src/tokens\n```\n\nIt is small on purpose. There is no plugin system and no config file beyond the file id and an output path."
+    "cover": {
+      "src": "/logiclink.png",
+      "alt": "Discord bot and community automation concept"
+    },
+    "featured": true,
+    "links": {},
+    "highlights": [
+      "Automated moderation, music playback, and community engagement features",
+      "Consolidated multiple bot responsibilities into one system",
+      "Implemented persistent user and server data storage using SQLite",
+      "Containerized the application using Docker"
+    ],
+    "body": "## Overview\n\nLogicLink is a multipurpose Discord bot designed to consolidate common community management and entertainment features into a single system.\n\n## Features\n\nThe bot provides automated moderation, music playback, and community engagement functionality. Discord.py handles the Discord integration, while Wavelink provides music functionality.\n\n## Persistence\n\nSQLite provides persistent storage for user and server data, allowing the bot to maintain configuration and state across sessions."
   }
 ]

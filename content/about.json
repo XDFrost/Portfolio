@@ -1,25 +1,62 @@
 {
-  "heading": "Engineer, occasional writer, reluctant on-call person.",
+  "heading": "Engineer, AI enthusiast, reluctant on-call person.",
   "photo": {
-    "src": "https://picsum.photos/seed/rohan-portrait-window/1000/1250",
-    "alt": "Portrait of Rohan by a window"
+    "src": "/about-main.png",
+    "alt": "Well, that's not suppose to happen"
   },
   "bio": [
-    "I am a full-stack engineer based in Bengaluru. For the last eight years I have worked on products where the database is the hard part: freight dispatch, payment reconciliation and offline-first mobile apps.",
-    "I care about boring, observable systems. Most of my best work has been removing things: a queue nobody needed, a cache that hid a slow query, a deploy step that only one person understood.",
+    "I’m an Associate SDET and AI Engineer based in Bengaluru. I build AI-powered systems, developer tools, and automation that turn repetitive engineering work into reliable, autonomous workflows.",
+    "My work spans AI agents, RAG, computer vision, test automation, and full-stack development. I’m particularly interested in what happens when you combine AI reasoning with solid software engineering—systems that don’t just generate answers, but actually get things done.",
     "Outside work I write about what breaks in production and how we fixed it. Some of those notes are on the [blog](/blog)."
   ],
   "skills": [
-    { "group": "Languages", "items": ["TypeScript", "Go", "Python", "SQL"] },
-    { "group": "Frontend", "items": ["React", "Next.js", "React Native", "Tailwind CSS"] },
-    { "group": "Backend and data", "items": ["PostgreSQL", "PostGIS", "Redis", "Kafka", "gRPC"] },
-    { "group": "Infrastructure", "items": ["AWS", "Terraform", "Docker", "GitHub Actions", "Grafana"] }
+    {
+      "group": "Languages",
+      "items": ["Python", "JavaScript", "TypeScript", "Java"]
+    },
+    {
+      "group": "Frontend",
+      "items": ["React.js", "Tailwind CSS", "Zustand"]
+    },
+    {
+      "group": "Backend",
+      "items": ["Node.js", "Express.js", "Flask", "FastAPI"]
+    },
+    {
+      "group": "AI / Machine Learning",
+      "items": [
+        "Machine Learning",
+        "Deep Learning",
+        "Generative AI",
+        "RAG",
+        "AI Agents",
+        "Agentic Workflows",
+        "NLP",
+        "PyTorch",
+        "Scikit-learn",
+        "OpenCV"
+      ]
+    },
+    {
+      "group": "AI Frameworks",
+      "items": ["LangChain", "LangGraph", "MCP", "ComfyUI"]
+    },
+    {
+      "group": "Testing & Automation",
+      "items": ["Playwright", "Pytest", "Airflow"]
+    },
+    {
+      "group": "Databases",
+      "items": ["MySQL", "SQLite", "MongoDB", "Vector Databases", "Knowledge Graphs"]
+    },
+    {
+      "group": "Cloud & Tools",
+      "items": ["AWS", "Git", "Docker"]
+    }
   ],
   "interests": [
-    "Query planners",
-    "Distributed sync",
-    "Typography",
-    "Long-distance cycling",
+    "Mini Projects",
+    "Games",
     "Filter coffee",
     "Mechanical keyboards"
   ],

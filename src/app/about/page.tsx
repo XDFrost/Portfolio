@@ -94,7 +94,7 @@ export default function AboutPage() {
                         {job.title} <span className="text-muted">at {job.company}</span>
                       </h3>
                       {job.summary ? (
-                        <p className="mt-2 max-w-[65ch] text-pretty leading-relaxed text-muted">{job.summary}</p>
+                        <p className="mt-2 mb-8 max-w-[65ch] text-pretty leading-relaxed text-muted">{job.summary}</p>
                       ) : null}
                     </div>
                   </li>
@@ -106,7 +106,7 @@ export default function AboutPage() {
 
         {/* Interests as a scroll-snap pill row */}
         {about.interests.length ? (
-          <section className="py-16 sm:py-24">
+          <section className="py-8 sm:py-24">
             <SectionHeading title={site.labels.interests} />
             <Reveal>
               <ul className="-mx-5 flex snap-x gap-2 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
