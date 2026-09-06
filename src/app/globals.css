@@ -1,26 +1,471 @@
 @import "tailwindcss";
 
+/* Dark mode is class-based (next-themes toggles `.dark` on <html>). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/* Design tokens. One neutral family (zinc-ish), one accent (cobalt).  */
+/* Radius rule: buttons and tags are pills, cards 16px, inputs 8px.    */
+/* ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --bg: #fafafa;
+  --surface: #fdfdfd;
+  --surface-2: #f1f1f3;
+  --text: #111113;
+  --muted: #5c5c66;
+  --faint: #8b8b94;
+  --border: #e4e4e8;
+  --accent: #2f5fd9;
+  --accent-fg: #fbfbfd;
+  --accent-soft: rgb(47 95 217 / 0.1);
+  --grid: rgb(60 72 110 / 0.3);
+  --grid-fade-start: 10%;
+  --grid-fade-end: 75%;
+  --shadow: 0 1px 2px rgb(20 20 30 / 0.04), 0 16px 48px -16px rgb(20 20 30 / 0.14);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #0c0c0e;
+  --surface: #141416;
+  --surface-2: #1c1c20;
+  --text: #f2f2f4;
+  --muted: #a3a3ad;
+  --faint: #70707a;
+  --border: #27272d;
+  --accent: #7191e8;
+  --accent-fg: #0c0c0e;
+  --accent-soft: rgb(113 145 232 / 0.14);
+  --grid: rgb(255 255 255 / 0.055);
+  --grid-fade-start: 30%;
+  --grid-fade-end: 85%;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 48px -16px rgb(0 0 0 / 0.65);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-soft: var(--shadow);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--accent-soft);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------ */
+/* Markdown body (rendered from JSON `body` fields)                    */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .md {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .md > * + * {
+    margin-top: 1.25em;
+  }
+  .md h2,
+  .md h3,
+  .md h4 {
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .md h2 {
+    font-size: 1.5rem;
+    margin-top: 2.25em;
+  }
+  .md h3 {
+    font-size: 1.2rem;
+    margin-top: 1.75em;
+  }
+  .md h4 {
+    font-size: 1.05rem;
+  }
+  .md p,
+  .md li {
+    color: var(--muted);
+  }
+  .md strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .md a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .md ul,
+  .md ol {
+    padding-left: 1.4em;
+  }
+  .md ul {
+    list-style: disc;
+  }
+  .md ol {
+    list-style: decimal;
+  }
+  .md li + li {
+    margin-top: 0.4em;
+  }
+  .md li::marker {
+    color: var(--faint);
+  }
+  .md blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25em;
+    color: var(--muted);
+  }
+  .md code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--surface-2);
+    border-radius: 6px;
+    padding: 0.15em 0.4em;
+    color: var(--text);
+  }
+  .md pre {
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+  .md pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    color: var(--text);
+  }
+  .md hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+  .md img {
+    border-radius: 16px;
+    max-width: 100%;
+  }
+  .md table {
+    width: 100%;
+    font-size: 0.9375rem;
+    border-collapse: collapse;
+  }
+  .md th,
+  .md td {
+    text-align: left;
+    padding: 0.6em 0.75em;
+    border-bottom: 1px solid var(--border);
+  }
+  .md th {
+    color: var(--text);
+    font-weight: 600;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Print (used by /resume so the browser's print dialog gives a PDF)   */
+/* ------------------------------------------------------------------ */
+@media print {
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f4f4f4;
+    --text: #111111;
+    --muted: #444444;
+    --faint: #777777;
+    --border: #dddddd;
+    --accent: #111111;
+    --accent-soft: transparent;
+    --shadow: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-tight {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  a {
+    text-decoration: none;
+  }
+  body {
+    font-size: 11pt;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Ambient background and grain. Both fixed, both pointer-events-none,  */
+/* so they never trigger repaints while the page scrolls.              */
+/* ------------------------------------------------------------------ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Top to bottom: a fade that hides the grid toward the edges and lower
+     viewport, two soft accent washes, then the grid. Light mode uses a dot
+     grid (quiet on a pale ground); dark mode uses hairlines. */
+  background:
+    radial-gradient(120% 90% at 50% 0%, transparent var(--grid-fade-start), var(--bg) var(--grid-fade-end)),
+    radial-gradient(55% 45% at 12% 0%, var(--accent-soft) 0%, transparent 65%),
+    radial-gradient(45% 40% at 95% 12%, color-mix(in oklab, var(--accent) 7%, transparent) 0%, transparent 65%),
+    radial-gradient(circle, var(--grid) 1px, transparent 1.6px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    32px 32px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    calc(50% - 16px) 0;
+}
+
+.dark body::before {
+  background:
+    radial-gradient(120% 90% at 50% 0%, transparent var(--grid-fade-start), var(--bg) var(--grid-fade-end)),
+    radial-gradient(55% 45% at 12% 0%, var(--accent-soft) 0%, transparent 65%),
+    radial-gradient(45% 40% at 95% 12%, color-mix(in oklab, var(--accent) 7%, transparent) 0%, transparent 65%),
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    64px 64px,
+    64px 64px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    calc(50% - 32px) 0,
+    calc(50% - 32px) 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.dark body::after {
+  opacity: 0.055;
+}
+
+/* ------------------------------------------------------------------ */
+/* Frosted glass. Used on fixed / floating chrome and small controls.  */
+/* Web glassmorphism approximation, not Apple's Liquid Glass.          */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .glass {
+    background-color: color-mix(in oklab, var(--surface) 62%, transparent);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid color-mix(in oklab, var(--border) 75%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.6),
+      inset 0 -1px 0 rgb(255 255 255 / 0.15),
+      var(--shadow);
+  }
+  .dark .glass {
+    background-color: color-mix(in oklab, var(--surface) 55%, transparent);
+    border-color: rgb(255 255 255 / 0.1);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      var(--shadow);
+  }
+  .glass-strong {
+    background-color: color-mix(in oklab, var(--bg) 82%, transparent);
+    -webkit-backdrop-filter: blur(40px) saturate(160%);
+    backdrop-filter: blur(40px) saturate(160%);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass,
+    .glass-strong {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background-color: var(--surface);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme switch: a short colour crossfade while html.theme-fade is set. */
+/* ------------------------------------------------------------------ */
+
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+  transition:
+    background-color 0.5s var(--ease-out-expo),
+    border-color 0.5s var(--ease-out-expo),
+    color 0.5s var(--ease-out-expo),
+    fill 0.5s var(--ease-out-expo),
+    stroke 0.5s var(--ease-out-expo),
+    outline-color 0.5s var(--ease-out-expo),
+    box-shadow 0.5s var(--ease-out-expo) !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* Marquee (one per page). Linear on purpose: constant travel speed.   */
+/* ------------------------------------------------------------------ */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 48s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@media print {
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Page transitions (React ViewTransition, see PageTransition.tsx).    */
+/* Old page fades and lifts away, new page settles in from below.     */
+/* ------------------------------------------------------------------ */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-old(.page-exit) {
+  animation: 220ms cubic-bezier(0.4, 0, 1, 1) both page-out;
+}
+::view-transition-new(.page-enter) {
+  animation: 480ms var(--ease-out-expo) 100ms both page-in;
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+    translate: 0 -12px;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Small details                                                       */
+/* ------------------------------------------------------------------ */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* Lazy images fade in once decoded; the frame's surface shows meanwhile. */
+img[data-fade] {
+  opacity: 0;
+  transition: opacity 0.7s var(--ease-out-expo);
+}
+img[data-fade][data-loaded="true"] {
+  opacity: 1;
+}
+
+/* Inline links: hairline underline that thickens on hover. */
+.md a,
+.link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, currentColor 45%, transparent);
+  transition:
+    text-decoration-color 0.3s var(--ease-out-expo),
+    text-decoration-thickness 0.3s var(--ease-out-expo);
+}
+.md a:hover,
+.link-underline:hover {
+  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
 }

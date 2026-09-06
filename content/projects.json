@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "dispatch",
+    "title": "Dispatch",
+    "summary": "Live route planning for a regional freight carrier. Replaced a spreadsheet and a phone tree.",
+    "year": 2025,
+    "role": "Lead engineer",
+    "stack": ["TypeScript", "Next.js", "PostgreSQL", "PostGIS", "Redis"],
+    "cover": {
+      "src": "https://picsum.photos/seed/dispatch-freight-map/1600/1000",
+      "alt": "Trucks lined up at a loading dock at dusk"
+    },
+    "featured": true,
+    "links": {
+      "live": "https://example.com/dispatch",
+      "repo": "https://github.com/your-handle/dispatch"
+    },
+    "highlights": [
+      "Cut average planning time per route from 40 minutes to under 5",
+      "PostGIS routing with cached isochrones, p95 under 300 ms",
+      "Runs on two small instances; no Kubernetes"
+    ],
+    "body": "## The problem\n\nKestrel Freight planned around 180 deliveries a day using a shared spreadsheet and a dispatcher who knew every driver's phone number by heart. When she went on leave, planning stopped.\n\n## What we built\n\nDispatch is a web app that ingests the day's orders, groups them into routes using PostGIS, and lets a dispatcher drag stops between drivers when reality disagrees with the plan. Drivers get a mobile view with turn-by-turn links and one-tap status updates.\n\n### Routing\n\nThe first version called a third-party routing API for every pair of stops. It was accurate and far too slow. We moved to precomputed isochrones stored in PostGIS and only call the external API for the final ordering inside each cluster.\n\n```sql\nSELECT stop_id\nFROM stops\nWHERE ST_Within(location, :isochrone_15_min)\nORDER BY ST_Distance(location, :depot);\n```\n\n### Keeping it boring\n\nThe whole system is one Next.js app, one Postgres database and one Redis instance for the live driver positions. Deploys are a single GitHub Actions job. The dispatcher has not needed to call me since launch, which is the metric I care about most.\n\n## Outcome\n\nPlanning a full day now takes the dispatcher a coffee break instead of a morning, and the carrier added a third depot without adding a second dispatcher."
+  },
+  {
+    "slug": "ledger-sync",
+    "title": "Ledger Sync",
+    "summary": "Reconciliation engine that matches bank statements against an internal ledger at forty million rows.",
+    "year": 2024,
+    "role": "Backend engineer",
+    "stack": ["Go", "PostgreSQL", "Kafka", "Grafana"],
+    "cover": {
+      "src": "https://picsum.photos/seed/ledger-sync-ink-paper/1600/1000",
+      "alt": "Stacks of printed ledgers on a wooden table"
+    },
+    "featured": true,
+    "links": {
+      "repo": "https://github.com/your-handle/ledger-sync"
+    },
+    "highlights": [
+      "Nightly reconciliation dropped from 6 hours to 35 minutes",
+      "Every unmatched row is explainable from a single audit table",
+      "Zero data loss through two Postgres major-version upgrades"
+    ],
+    "body": "## Context\n\nParvati Pay settles a few hundred thousand transactions a day. Every night a job compares the bank's statement with the internal ledger and flags anything that does not line up. When the job started taking longer than the night, finance noticed before engineering did.\n\n## Approach\n\nThe old job loaded both sides into memory and compared them in application code. Ledger Sync pushes the matching into Postgres with a staged pipeline:\n\n1. Load the bank file into an unlogged staging table.\n2. Match exact pairs with a single hash join.\n3. Match near pairs (amount equal, date within two days) with a range join on a partial index.\n4. Write everything that remains, with the reason it failed each stage, to an audit table.\n\nKafka carries the per-transaction results downstream so the support tool can show a customer why a payment is still pending.\n\n## What I would do differently\n\nWe kept the fuzzy-matching rules in Go for too long. Moving them into SQL made them faster and, more importantly, made them readable to the finance team who owned the rules in the first place."
+  },
+  {
+    "slug": "fieldnotes",
+    "title": "Fieldnotes",
+    "summary": "Offline-first notes app for surveyors who spend days without signal. Sync that never asks the user to pick a version.",
+    "year": 2026,
+    "role": "Solo developer",
+    "stack": ["React Native", "TypeScript", "SQLite", "CRDTs"],
+    "cover": {
+      "src": "https://picsum.photos/seed/fieldnotes-hillside-survey/1600/1000",
+      "alt": "A surveyor on a hillside holding a tablet"
+    },
+    "featured": true,
+    "links": {
+      "live": "https://example.com/fieldnotes"
+    },
+    "highlights": [
+      "Works for a full week offline, syncs in seconds when back online",
+      "Conflict-free merges using per-field last-writer-wins registers",
+      "Under 9 MB installed"
+    ],
+    "body": "## Why another notes app\n\nGeological surveyors at Oakmoss Consulting spend days in places with no signal, then come back to a hotel and try to merge three people's notes about the same site. Every generic notes app either lost edits or made them choose between versions they did not remember writing.\n\n## Design\n\nEach note is a document of independent fields. Every field is a CRDT register tagged with a hybrid logical clock, so two people editing different fields of the same note never conflict, and two people editing the same field converge deterministically without a dialog.\n\nStorage is SQLite on device. Sync is a plain HTTPS endpoint that accepts a batch of operations and returns everything the client has not seen. There is no realtime layer because surveyors do not need one.\n\n## Current work\n\nI am replacing the per-field registers with a small sequence CRDT for the long-form description field, so that two people extending the same paragraph both keep their text."
+  },
+  {
+    "slug": "palette",
+    "title": "Palette",
+    "summary": "Command-line tool that pulls design tokens from a Figma file and writes them as CSS variables and TypeScript types.",
+    "year": 2023,
+    "role": "Creator and maintainer",
+    "stack": ["Node.js", "TypeScript", "Figma API"],
+    "cover": {
+      "src": "https://picsum.photos/seed/palette-color-swatches/1600/1000",
+      "alt": "Paint swatches fanned out on a grey surface"
+    },
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/your-handle/palette"
+    },
+    "highlights": [
+      "One command replaces a weekly copy-paste ritual",
+      "Diffs token changes in pull requests so reviewers see what moved"
+    ],
+    "body": "## Origin\n\nOur design team changed a grey. Three weeks later two products were still using the old one. Palette started as a script to end that conversation.\n\n## How it works\n\nPalette reads the variables collection from a Figma file, normalises colour, spacing and type tokens into a single JSON tree, and emits CSS custom properties plus a TypeScript module with literal types. Run it in CI and the pull request shows exactly which tokens changed.\n\n```bash\nnpx palette pull --file FIGMA_FILE_ID --out src/tokens\n```\n\nIt is small on purpose. There is no plugin system and no config file beyond the file id and an output path."
+  }
+]

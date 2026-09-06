@@ -1,0 +1,41 @@
+{
+  "name": "Rohan Mehrotra",
+  "role": "Full-stack engineer",
+  "tagline": "I build data-heavy web products that stay fast as they grow.",
+  "email": "hello@rohanmehrotra.example",
+  "url": "https://rohanmehrotra.example",
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about" },
+    { "label": "Projects", "href": "/projects" },
+    { "label": "Blog", "href": "/blog" },
+    { "label": "Resume", "href": "/resume" }
+  ],
+  "socials": [
+    { "label": "GitHub", "href": "https://github.com/your-handle", "icon": "github" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/your-handle", "icon": "linkedin" },
+    { "label": "Email", "href": "mailto:hello@rohanmehrotra.example", "icon": "email" }
+  ],
+  "footerNote": "Built with Next.js. Every word on this site lives in a JSON file.",
+  "pages": {
+    "about": { "title": "About" },
+    "projects": {
+      "title": "Projects",
+      "intro": "Things I have built and kept running. Filter by what they are made of."
+    },
+    "blog": {
+      "title": "Blog",
+      "intro": "Notes on what broke in production and what we did about it."
+    },
+    "resume": { "title": "Resume" }
+  },
+  "labels": {
+    "featured": "Selected work",
+    "latestPosts": "Latest writing",
+    "skills": "What I work with",
+    "experience": "Experience",
+    "interests": "Interests",
+    "education": "Education",
+    "certifications": "Certifications"
+  }
+}

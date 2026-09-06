@@ -1,0 +1,72 @@
+{
+  "basics": {
+    "name": "Rohan Mehrotra",
+    "title": "Senior Full-stack Engineer",
+    "location": "Bengaluru, India",
+    "email": "hello@rohanmehrotra.example",
+    "summary": "Eight years building data-heavy web products for logistics and fintech teams. I lead small teams, own systems end to end, and prefer fewer moving parts.",
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/your-handle" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/your-handle" }
+    ]
+  },
+  "experience": [
+    {
+      "company": "Kestrel Freight",
+      "title": "Lead Engineer",
+      "location": "Bengaluru",
+      "start": "2024-03",
+      "end": "Present",
+      "summary": "Lead a team of four building Dispatch, the carrier's route planning and driver app.",
+      "bullets": [
+        "Designed the PostGIS routing pipeline; planning time per route fell from 40 minutes to under 5",
+        "Replaced a Kubernetes deployment with two instances and a single CI job, cutting infrastructure cost by roughly half",
+        "Set up on-call rotation and runbooks; no unplanned downtime in the last twelve months"
+      ]
+    },
+    {
+      "company": "Parvati Pay",
+      "title": "Backend Engineer",
+      "location": "Remote",
+      "start": "2021-06",
+      "end": "2024-02",
+      "summary": "Owned the ledger and reconciliation services for a payments platform processing a few hundred thousand transactions a day.",
+      "bullets": [
+        "Rebuilt nightly reconciliation as a staged SQL pipeline; runtime dropped from 6 hours to 35 minutes",
+        "Introduced an audit table that made every unmatched transaction explainable to finance without engineering help",
+        "Led two Postgres major-version upgrades with zero data loss"
+      ]
+    },
+    {
+      "company": "Oakmoss Consulting",
+      "title": "Software Engineer",
+      "location": "Pune",
+      "start": "2018-07",
+      "end": "2021-05",
+      "summary": "Built internal tools for a geological survey firm, including the first version of Fieldnotes.",
+      "bullets": [
+        "Shipped an offline-first React Native app used daily by a team of twelve surveyors",
+        "Wrote the data import pipeline that replaced manual transcription of field notes",
+        "Mentored two interns who both joined full time"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "College of Engineering, Pune",
+      "degree": "B.E. Computer Engineering",
+      "start": "2014",
+      "end": "2018",
+      "note": "Final-year project on spatial indexing for mobile databases"
+    }
+  ],
+  "skills": [
+    { "group": "Languages", "items": ["TypeScript", "Go", "Python", "SQL"] },
+    { "group": "Frameworks", "items": ["React", "Next.js", "React Native", "Node.js"] },
+    { "group": "Data", "items": ["PostgreSQL", "PostGIS", "Redis", "Kafka", "SQLite"] },
+    { "group": "Infrastructure", "items": ["AWS", "Terraform", "Docker", "GitHub Actions", "Grafana"] }
+  ],
+  "certifications": [
+    { "name": "AWS Certified Solutions Architect, Associate", "issuer": "Amazon Web Services", "year": 2023 }
+  ]
+}
